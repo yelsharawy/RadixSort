@@ -25,4 +25,10 @@ public class Radix {
         return pow10.length;
     }
 
+    public static void merge(MyLinkedList original, MyLinkedList[] buckets) {
+        for (MyLinkedList bucket : buckets) {
+            original.extend(bucket);
+        }
+    }
+
 }
