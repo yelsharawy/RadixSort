@@ -10,4 +10,19 @@ public class Radix {
         return Math.abs(n / pow10[col] % 10);
     }
 
+    public static int length(int n) {
+        /* This "Math" approach is ***WAY*** too slow. I timed it.
+         * While mine can do all possible integer values in 1.5 s,
+         * this one took over 70 seconds before I killed it.
+        return n == 0 ? 1 : (int)(Math.log10(Math.abs(n)) + 1);
+        */
+        n = Math.abs(n);
+        for (int i = 1; i < pow10.length; i++) {
+            if (n < pow10[i]) {
+                return i;
+            }
+        }
+        return pow10.length;
+    }
+
 }
