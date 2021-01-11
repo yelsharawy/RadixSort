@@ -14,6 +14,11 @@ public class Radix {
         /* This "Math" approach is ***WAY*** too slow. I timed it.
          * While mine can do all possible integer values in 1.5 s,
          * this one took over 70 seconds before I killed it.
+         *
+         * EDIT: I noticed this was probably due to branch prediction,
+         * so I tested it again with random values. Sure enough,
+         * the speeds were much more comparable, but my approach
+         * was still clearly faster.
         return n == 0 ? 1 : (int)(Math.log10(Math.abs(n)) + 1);
         */
         n = Math.abs(n);
