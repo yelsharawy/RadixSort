@@ -1,15 +1,17 @@
-public class Radix {
+import java.util.*;
 
-    private static final int[] pow10 = { // lookup table for O(1) pow
+public class Radix {
+    
+    private static final int[] pow10 = {  // lookup table for O(1) pow
         1, 10, 100, 1000,
         10000, 100000, 1000000, 10000000,
         100000000, 1000000000
     };
-
+    
     public static int nth(int n, int col) {
         return Math.abs(n / pow10[col] % 10);
     }
-
+    
     public static int length(int n) {
         /* This "Math" approach is ***WAY*** too slow. I timed it.
          * While mine can do all possible integer values in 1.5 s,
@@ -29,19 +31,39 @@ public class Radix {
         }
         return pow10.length;
     }
-
-    public static void merge(MyLinkedList original, MyLinkedList[] buckets) {
-        for (MyLinkedList bucket : buckets) {
+    
+    public static void merge(SortableLinkedList original, SortableLinkedList[] buckets) {
+        for (SortableLinkedList bucket : buckets) {
             original.extend(bucket);
         }
     }
     
     public static void radixSortSimple(SortableLinkedList data) {
+        int maxLength = 0;
+        for (int i = 0; i < data.size(); i++) {
+            int value = data.remove(0);  // for O(1) traversal
+            maxLength = Math.max(maxLength, length(value));
+            data.add(value);
+        }
+        
+        SortableLinkedList[] buckets = new SortableLinkedList[10];
+        for (int i = 0; i < buckets.length; i++) {
+            buckets[i] = new SortableLinkedList();
+        }
+        
+        for (int i = 0; i < maxLength; i++) {
+            while (data.size() > 0) {
+                int value = data.remove(0);  // for O(1) traversal & clearing
+                int digit = nth(value, i);
+                buckets[digit].add(value);
+            }
+            merge(data, buckets);
+        }
         
     }
     
     public static void radixSort(SortableLinkedList data) {
         
     }
-
+    
 }
