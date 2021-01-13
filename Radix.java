@@ -63,7 +63,20 @@ public class Radix {
     }
     
     public static void radixSort(SortableLinkedList data) {
+        radixSortSimple(data);
+        SortableLinkedList negatives = new SortableLinkedList();
+        SortableLinkedList positives = new SortableLinkedList();
         
+        while (data.size() > 0) {
+            int value = data.remove(0);  // for O(1) traversal & clearing
+            if (value < 0) {
+                negatives.add(0, value);  // reversed
+            } else {
+                positives.add(value);
+            }
+        }
+        data.extend(negatives);
+        data.extend(positives);
     }
     
 }
