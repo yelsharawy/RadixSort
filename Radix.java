@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Radix {
     
     private static final int[] pow10 = {  // lookup table for O(1) pow
@@ -41,7 +39,7 @@ public class Radix {
     public static void radixSortSimple(SortableLinkedList data) {
         int maxLength = 0;
         for (int i = 0; i < data.size(); i++) {
-            int value = data.remove(0);  // for O(1) traversal
+            int value = data.remove(0);  // for O(n) traversal
             maxLength = Math.max(maxLength, length(value));
             data.add(value);
         }
@@ -53,7 +51,7 @@ public class Radix {
         
         for (int i = 0; i < maxLength; i++) {
             while (data.size() > 0) {
-                int value = data.remove(0);  // for O(1) traversal & clearing
+                int value = data.remove(0);  // for O(n) traversal & clearing
                 int digit = nth(value, i);
                 buckets[digit].add(value);
             }
@@ -68,7 +66,7 @@ public class Radix {
         SortableLinkedList positives = new SortableLinkedList();
         
         while (data.size() > 0) {
-            int value = data.remove(0);  // for O(1) traversal & clearing
+            int value = data.remove(0);  // for O(n) traversal & clearing
             if (value < 0) {
                 negatives.add(0, value);  // reversed
             } else {
