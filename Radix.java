@@ -35,5 +35,13 @@ public class Radix {
             original.extend(bucket);
         }
     }
+    
+    public static void radixSortSimple(SortableLinkedList data) {
+        
+    }
+    
+    public static void radixSort(SortableLinkedList data) {
+        
+    }
 
 }
